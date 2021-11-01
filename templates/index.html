@@ -1,8 +1,44 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>
+            ToDO App
+        </title>
+        <!-- <link rel ="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    </head>
 <body>
+<div style="margin-top: 50px;" class="ui container">
+    <h1 class="ui center aligned header">To Do App</h1>
+    <div>
+        <br>
+        <form class="ui form" action="/" method="POST">
+            <div class="field">
+                <br>
+                <label>To do list</label>
+                <input type = "text" name ="text" placeholder="Enter your task">
+            </div>
+            <button class="ui blue button" type="submit"> Add to list</button>
+            <br>
+        </form>
+    </div>
+    <br>
+    <div>
+        {% for todo in todo_list %}
+        <div class="ui segment">
+            <p class="ui big header">{{todo.id }} | {{ todo.text }}</p>
 
-Welcome Sathyajith
-<a href= "{{url_for('hello')}}">Click Here</a>
+            {% if todo.complete == False %}
+            <span class="ui gray label">Not Complete</span>
+            {% else %}
+            <span class="ui green label">Completed</span>
+            {% endif %}
+
+            <a class="ui blue button" href="/update/{{todo.id }}">Update</a>
+            <a class="ui red button" href="/delete/{{todo.id }}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 </body>
 </html>
